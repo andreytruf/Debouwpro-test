@@ -241,32 +241,6 @@
   list-style: disc;
   padding-left: 1.2rem;
 }
-.home-design .energy-art {
-  position: relative;
-  min-height: 19rem;
-  overflow: hidden;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 46px, #f2f0ec18 47px 48px),
-    repeating-linear-gradient(0deg, transparent 0 46px, #f2f0ec18 47px 48px),
-    radial-gradient(ellipse at 35% 30%, #514035, #211f1d 65%, #171717);
-}
-.home-design .energy-art.mini {
-  min-height: 0;
-}
-.home-design .energy-art i {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: min(44%, 17rem);
-  aspect-ratio: 1;
-  border: 1px solid var(--home-copper);
-  transform: translate(-50%, -50%) rotate(32deg);
-}
-.home-design .energy-art i:nth-child(2) {
-  transform: translate(-44%, -51%) rotate(50deg);
-}
-.home-design .energy-art i:nth-child(3) {
-  transform: translate(-55%, -49%) rotate(68deg);
-}
 .home-contact h2 {
   margin-bottom: 1rem;
 }
@@ -470,4 +444,83 @@
 .service-preview img {
   width: 100%;
   height: auto;
+}
+
+.home-design .floor-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.floor-media > div {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-design .energy-display {
+  display: grid;
+  grid-template-columns: 1.27fr 1fr 1fr 0.78fr;
+  align-items: stretch;
+  gap: clamp(0.3rem, 1.2vw, 1rem);
+  padding: clamp(0.55rem, 2vw, 1.5rem);
+  color: var(--home-ink);
+  background: linear-gradient(165deg, #f2eee8, #d9cbb9);
+}
+
+.home-design .energy-display-large {
+  align-content: center;
+  min-height: 21rem;
+  padding: clamp(1rem, 3vw, 3rem);
+}
+
+.display-unit {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: end;
+  text-align: center;
+  min-width: 0;
+}
+
+.home-design .energy-display .display-unit img {
+  position: static;
+  width: 100%;
+  height: 100%;
+  max-height: clamp(8rem, 21vw, 22rem);
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.display-whspr img {
+  mix-blend-mode: multiply;
+}
+
+.home-design .energy-display .display-tesla img {
+  height: auto;
+  max-height: none;
+  align-self: end;
+  border-radius: 2px;
+}
+
+.home-design .energy-display .display-peblar img {
+  align-self: center;
+  height: auto;
+}
+
+.display-label {
+  display: grid;
+  gap: 0.15rem;
+  margin-top: 0.65rem;
+  font-size: clamp(0.72rem, 1.15vw, 0.95rem);
+  line-height: 1.25;
+}
+
+.home-design .dark .display-credit {
+  grid-column: 1 / -1;
+  margin-top: 0.6rem;
+  color: #4d463f;
+  font-size: 0.78rem;
+}
+
+.display-credit a {
+  text-decoration: underline;
 }

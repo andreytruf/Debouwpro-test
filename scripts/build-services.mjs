@@ -49,7 +49,7 @@ export async function buildServices() {
       <a class="text-link" href="/#diensten">Terug naar expertise</a>
       <h1 class="service-page-title">${title}</h1>
       <p class="home-intro">${intro}</p>
-      ${photo ? '<figure class="service-preview"><img src="/assets/services/vloer-utrecht.webp" width="560" height="350" alt="Afgewerkte vloer bij een keukenrenovatie in Utrecht"><figcaption>Voorbeeld van vloerafwerking · Utrecht</figcaption></figure>' : ""}
+      ${photo ? '<figure class="service-preview"><img src="/assets/services/vloer-utrecht.webp" width="490" height="230" alt="Afgewerkte vloer bij een keukenrenovatie in Utrecht"><figcaption>Voorbeeld van vloerafwerking · Utrecht</figcaption></figure>' : ""}
       <div class="service-details">${sections.map(([heading, text]) => `<section><h2>${heading}</h2><p>${text}</p></section>`).join("")}</div>
       <div class="home-actions">
         <a class="home-button copper" href="mailto:hallo@debouwpro.nl?subject=${encodeURIComponent(title)}">Bespreek uw project</a>
