@@ -3,6 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 
 for (const width of [320, 390, 768, 1440]) {
   test(`layout, assets and accessibility at ${width}px`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width, height: 900 });
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
