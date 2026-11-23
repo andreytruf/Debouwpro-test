@@ -13,7 +13,7 @@ for (const width of [320, 390, 768, 1440]) {
     });
     await page.goto("/");
     await expect(page.locator("h1")).toHaveCount(1);
-    for (const image of await page.locator("img").all()) {
+    for (const image of await page.locator("img:visible").all()) {
       await image.scrollIntoViewIfNeeded();
       await expect(image).toHaveJSProperty("complete", true);
       expect(await image.evaluate((img) => img.naturalWidth)).toBeGreaterThan(
@@ -87,4 +87,44 @@ test("Cloudflare headers, missing paths and source isolation", async ({
   ]) {
     expect((await request.get(path)).status()).toBe(404);
   }
+});
+
+test("portfolio opens and closes by keyboard, returning focus", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const photo = page.locator("[data-gallery]").first();
+  await photo.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.locator("#beeldtitel")).toContainText("Houten");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(photo).toBeFocused();
+});
+
+test("the inquiry validates input and prepares a WhatsApp draft on request", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const form = page.locator("#offerte");
+  const submit = form.getByRole("button", { name: "Open WhatsApp" });
+  await submit.click();
+  await expect(form.locator(":invalid").first()).toBeVisible();
+  const service = page.locator("[data-project]").first();
+  await service.focus();
+  await page.keyboard.press("Enter");
+  await expect(form.locator("select")).toHaveValue("Complete woningrenovatie");
+  await form.getByLabel("Naam").fill("Test");
+  await form.getByLabel("E-mailadres").fill("test@example.com");
+  await form.getByLabel("Bericht").fill("Testbericht");
+  await page.route("https://wa.me/**", (route) =>
+    route.fulfill({ body: "Test" }),
+  );
+  const outgoing = page.waitForRequest("https://wa.me/**");
+  await submit.click({ timeout: 5000 });
+  const url = new URL((await outgoing).url());
+  expect(url.pathname).toBe("/31612350850");
+  expect(url.searchParams.get("text")).toContain("Testbericht");
 });

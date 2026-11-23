@@ -26,3 +26,11 @@ After staging publication, run `node scripts/audit-privacy.mjs` against the stag
 Use **hallo@debouwpro.nl**, **info@debouwpro.nl** and **+31 6 12350850**. The main mailbox uses the Dutch spelling with **a**.
 
 The separate legal documents retain **CONCEPT** status. The older combined draft is historical reference. The proposed 24/60-month guarantee in the Particulieren draft requires formal approval before any promotional use. Main and production release require separate explicit approval of the reviewed version.
+
+## Homepage design reference
+
+The corporate homepage integrates the supplied ChatGPT Sites prototype using the existing static build. The Utrecht kitchen hero, portfolio derivatives and Canva V2 primary preview come from the owner's source archive. The original Canva SVG can replace the transparent PNG when available. Portfolio captions use project type and city.
+
+The homepage form validates in the browser and prepares a draft in the visitor's mail app or WhatsApp. There is no website submission endpoint. The visitor sends the message themselves. The Test privacy notice describes this behavior.
+
+Use Test for routine website changes and review the deployed staging URL. Playground is for dedicated experiments. Promote an approved Test revision to Main only after explicit approval.
