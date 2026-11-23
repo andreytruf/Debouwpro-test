@@ -413,3 +413,61 @@
     flex-direction: column;
   }
 }
+
+.home-design .installation-media {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  background: var(--home-paper);
+}
+.installation-media > div {
+  position: relative;
+  overflow: hidden;
+}
+.installation-media img {
+  object-position: center;
+}
+.installation-credit {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.groundwork-link {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  padding-block: 1.25rem;
+  border-block: 1px solid var(--home-line);
+}
+.groundwork-link a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.service-page-title {
+  margin-top: 1.5rem;
+  font-size: clamp(2.7rem, 7vw, 6rem);
+}
+.service-details {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-block: 2rem;
+}
+.service-details section {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--home-line);
+}
+.service-page .service-details h2 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  letter-spacing: -0.035em;
+}
+.service-preview {
+  max-width: 35rem;
+  margin: 0;
+}
+.service-preview img {
+  width: 100%;
+  height: auto;
+}

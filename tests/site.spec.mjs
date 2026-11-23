@@ -143,3 +143,31 @@ test("the inquiry validates input and prepares a WhatsApp draft on request", asy
   expect(url.pathname).toBe("/31612350850");
   expect(url.searchParams.get("text")).toContain("Testbericht");
 });
+
+test("flooring and excavation are linked from expertise", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".installation-media img")).toHaveCount(3);
+  await page
+    .getByRole("link", { name: "Vloerverwarming en vloerafwerking" })
+    .click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Vloerverwarming en vloerafwerking",
+  );
+  await expect(
+    page.getByRole("heading", { name: "Infrezen in de bestaande dekvloer" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Bespreek uw project" }),
+  ).toHaveAttribute("href", /^mailto:hallo@debouwpro\.nl/);
+  const excavation = await request.get("/graafwerk/");
+  expect(excavation.status()).toBe(200);
+  expect(excavation.headers()["x-robots-tag"]).toContain("noindex");
+  await page.goto("/");
+  await page.getByRole("link", { name: "Bekijk graafwerk" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Graafwerk met een minigraver",
+  );
+});
