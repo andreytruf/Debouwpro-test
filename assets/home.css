@@ -1,4 +1,5 @@
 .home-design {
+  --home-media-ratio: 16 / 10;
   --home-paper: #f2f0ec;
   --home-ink: #1a1a1a;
   --home-copper: #d97841;
@@ -159,11 +160,20 @@
 .home-design .services article {
   border-bottom: 1px solid var(--home-line);
 }
-.home-design .services img,
-.home-design .services .mini {
+.home-design .service-media,
+.home-gallery a {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--home-media-ratio);
+  overflow: hidden;
+}
+.home-design .service-media img,
+.home-gallery img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  aspect-ratio: 1.7;
+  height: 100%;
   object-fit: cover;
 }
 .home-design .card-copy {
@@ -200,22 +210,11 @@
 }
 .home-design .home-gallery {
   display: grid;
-  grid-template-columns: 1.23fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2rem 1.25rem;
 }
 .home-gallery figure {
   margin: 0;
-}
-.home-gallery a {
-  display: block;
-  overflow: hidden;
-}
-.home-gallery img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1.52;
-  object-fit: cover;
-  object-position: center;
 }
 .home-gallery figcaption {
   display: flex;

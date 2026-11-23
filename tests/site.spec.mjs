@@ -25,6 +25,21 @@ for (const width of [320, 390, 768, 1440]) {
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
+    const allMedia = page.locator(".service-media, .home-gallery a");
+    for (const media of await allMedia.all()) {
+      const box = await media.boundingBox();
+      expect(box.width / box.height).toBeCloseTo(1.6, 1);
+    }
+    const cards = await page.locator(".services article").evaluateAll((items) =>
+      items.map((item) => ({
+        top: item.getBoundingClientRect().top,
+        bottom: item.querySelector(".card-copy").getBoundingClientRect().bottom,
+      })),
+    );
+    for (const card of cards) {
+      const nextRow = cards.find((candidate) => candidate.top > card.top);
+      if (nextRow) expect(nextRow.top).toBeGreaterThan(card.bottom);
+    }
     expect(errors).toEqual([]);
     const audit = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
