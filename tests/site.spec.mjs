@@ -158,7 +158,7 @@ test("flooring and excavation are linked from expertise", async ({
     page.getByRole("heading", { name: "Infrezen in de bestaande dekvloer" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Bespreek uw project" }),
+    page.getByRole("link", { name: "Bespreek uw project", exact: true }),
   ).toHaveAttribute("href", /^mailto:hallo@debouwpro\.nl/);
   const excavation = await request.get("/graafwerk/");
   expect(excavation.status()).toBe(200);
