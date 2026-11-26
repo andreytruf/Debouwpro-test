@@ -114,6 +114,18 @@
   width: 2rem;
   height: 2rem;
 }
+.service-symbol--pair {
+  width: 6rem;
+}
+.service-symbol--pair svg {
+  width: 4.1667rem;
+}
+.service-symbol--trio {
+  width: 8rem;
+}
+.service-symbol--trio svg {
+  width: 6.3333rem;
+}
 .home-gallery a {
   position: relative;
   display: block;
