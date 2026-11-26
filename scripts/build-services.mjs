@@ -18,6 +18,7 @@ const pages = [
       [
         "Afwerken met PVC, tegels of laminaat",
         "We stemmen egalisatie en afwerking af op de gekozen vloer. PVC, tegels en laminaat moeten geschikt zijn voor vloerverwarming. Ook de ondervloer, warmteweerstand, droogtijd en het opstookprotocol tellen mee.",
+        "vloerafwerking",
       ],
     ],
     photo: true,
@@ -50,7 +51,7 @@ export async function buildServices() {
       <h1 class="service-page-title">${title}</h1>
       <p class="home-intro">${intro}</p>
       ${photo ? '<figure class="service-preview"><img src="/assets/services/vloer-utrecht.webp" width="490" height="230" alt="Afgewerkte vloer bij een keukenrenovatie in Utrecht"><figcaption>Voorbeeld van vloerafwerking · Utrecht</figcaption></figure>' : ""}
-      <div class="service-details">${sections.map(([heading, text]) => `<section><h2>${heading}</h2><p>${text}</p></section>`).join("")}</div>
+      <div class="service-details">${sections.map(([heading, text, id]) => `<section${id ? ` id="${id}"` : ""}><h2>${heading}</h2><p>${text}</p></section>`).join("")}</div>
       <div class="home-actions">
         <a class="home-button copper" href="mailto:hallo@debouwpro.nl?subject=${encodeURIComponent(title)}">Bespreek uw project</a>
         ${related ?? ""}

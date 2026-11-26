@@ -149,7 +149,7 @@ test("flooring and excavation are linked from expertise", async ({
   request,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".services .service-symbol svg")).toHaveCount(6);
+  await expect(page.locator(".services .service-symbol svg")).toHaveCount(8);
   await page
     .getByRole("link", { name: "Vloerverwarming en vloerafwerking" })
     .click();
@@ -165,6 +165,10 @@ test("flooring and excavation are linked from expertise", async ({
   const excavation = await request.get("/graafwerk/");
   expect(excavation.status()).toBe(200);
   expect(excavation.headers()["x-robots-tag"]).toContain("noindex");
+  await page.goto("/");
+  await page.getByRole("link", { name: "Bekijk vloerafwerking" }).click();
+  await expect(page).toHaveURL(/#vloerafwerking$/);
+  await expect(page.locator("#vloerafwerking h2")).toBeVisible();
   await page.goto("/");
   await page.getByRole("link", { name: "Bekijk graafwerk" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(

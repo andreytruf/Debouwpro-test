@@ -361,19 +361,6 @@
   }
 }
 
-.groundwork-link {
-  display: grid;
-  gap: 0.6rem;
-  margin-top: 2rem;
-  padding-block: 1.25rem;
-  border-block: 1px solid var(--home-line);
-}
-.groundwork-link a {
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
 .service-page-title {
   margin-top: 1.5rem;
 }
