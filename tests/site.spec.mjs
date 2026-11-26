@@ -127,9 +127,7 @@ test("the inquiry validates input and prepares a WhatsApp draft on request", asy
   const submit = form.getByRole("button", { name: "Open WhatsApp" });
   await submit.click();
   await expect(form.locator(":invalid").first()).toBeVisible();
-  const service = page.locator("[data-project]").first();
-  await service.focus();
-  await page.keyboard.press("Enter");
+  await page.goto("/?project=Complete%20woningrenovatie#contact");
   await expect(form.locator("select")).toHaveValue("Complete woningrenovatie");
   await form.getByLabel("Naam").fill("Test");
   await form.getByLabel("E-mailadres").fill("test@example.com");
@@ -149,7 +147,7 @@ test("flooring and excavation are linked from expertise", async ({
   request,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".services .service-symbol svg")).toHaveCount(8);
+  await expect(page.locator(".services .service-symbol svg")).toHaveCount(9);
   await page
     .getByRole("link", { name: "Vloerverwarming en vloerafwerking" })
     .click();
@@ -167,11 +165,53 @@ test("flooring and excavation are linked from expertise", async ({
   expect(excavation.headers()["x-robots-tag"]).toContain("noindex");
   await page.goto("/");
   await page.getByRole("link", { name: "Bekijk vloerafwerking" }).click();
-  await expect(page).toHaveURL(/#vloerafwerking$/);
-  await expect(page.locator("#vloerafwerking h2")).toBeVisible();
+  await expect(page).toHaveURL(/\/vloeren\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Vloeren & afwerking",
+  );
   await page.goto("/");
   await page.getByRole("link", { name: "Bekijk graafwerk" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Graafwerk met een minigraver",
+  );
+});
+
+test("each service card opens its destination from the card surface", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const missingAssets = [];
+  page.on("response", (response) => {
+    if (response.status() >= 400 && response.url().includes("/assets/")) {
+      missingAssets.push(response.url());
+    }
+  });
+  const destinations = [
+    "/woningrenovatie/",
+    "/badkamerrenovatie/",
+    "/keukenrenovatie/",
+    "/installatiewerk/",
+    "/vloeren/",
+    "/energy/",
+    "/vloerverwarming/",
+    "/graafwerk/",
+    "/zakelijk-onderhoud/",
+  ];
+  for (const [index, destination] of destinations.entries()) {
+    await page.goto("/");
+    const card = page.locator(".services article").nth(index);
+    await card.click({ position: { x: 21, y: 21 } });
+    await page.waitForURL(new URL(destination, page.url()).href);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    if (destination !== "/energy/") {
+      await expect(
+        page.getByRole("heading", { name: "Zo werken we" }),
+      ).toBeVisible();
+    }
+  }
+  expect(missingAssets).toEqual([]);
+  await page.getByRole("link", { name: "Vraag een offerte aan" }).click();
+  await expect(page.locator("#offerte select")).toHaveValue(
+    "Zakelijk & VvE-onderhoud",
   );
 });

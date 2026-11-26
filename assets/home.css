@@ -361,29 +361,26 @@
   }
 }
 
-.service-page-title {
-  margin-top: 1.5rem;
+.home-design .services article {
+  position: relative;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
 }
-.service-details {
-  display: grid;
-  gap: 1.5rem;
-  max-width: 48rem;
-  margin-block: 2rem;
+
+.services .card-copy a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
-.service-details section {
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--home-line);
+
+.home-design .services article:hover,
+.home-design .services article:focus-within {
+  border-color: var(--site-ink);
+  background: var(--site-paper);
 }
-.service-page .service-details h2 {
-  margin-bottom: 0.55rem;
-  font-size: clamp(1.5rem, 3vw, 2.15rem);
-  letter-spacing: -0.035em;
-}
-.service-preview {
-  max-width: 35rem;
-  margin: 0;
-}
-.service-preview img {
-  width: 100%;
-  height: auto;
+
+.services article:focus-within {
+  outline: 2px solid var(--site-ink);
+  outline-offset: 3px;
 }

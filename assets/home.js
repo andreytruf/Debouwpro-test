@@ -4,11 +4,14 @@ form.querySelector("fieldset").disabled = false;
 form.querySelectorAll('button[type="submit"]').forEach((button) => {
   button.disabled = false;
 });
-document.querySelectorAll("[data-project]").forEach((link) => {
-  link.addEventListener("click", () => {
-    fields.project.value = link.dataset.project;
-  });
-});
+const requestedProject = new URLSearchParams(location.search).get("project");
+if (
+  Array.from(fields.project.options).some(
+    ({ value }) => value === requestedProject,
+  )
+) {
+  fields.project.value = requestedProject;
+}
 for (const field of [fields.naam, fields.bericht]) {
   field.addEventListener("input", () => field.setCustomValidity(""));
 }

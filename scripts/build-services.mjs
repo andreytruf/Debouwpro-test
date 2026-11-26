@@ -1,6 +1,9 @@
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 
+import { additionalServices } from "./service-content.mjs";
+
 const pages = [
+  ...additionalServices,
   {
     slug: "vloerverwarming",
     title: "Vloerverwarming en vloerafwerking",
@@ -21,13 +24,49 @@ const pages = [
         "vloerafwerking",
       ],
     ],
-    photo: true,
+    photo: [
+      "/assets/services/vloer-utrecht.webp",
+      "Voorbeeld van vloerafwerking · Utrecht",
+    ],
+    project: "Vloerverwarming",
+    steps: [
+      [
+        "Vloer en warmtebron beoordelen",
+        "We bekijken de bestaande vloer, beschikbare opbouwhoogte en het verwarmingssysteem.",
+      ],
+      [
+        "Systeem kiezen en aanleggen",
+        "We stemmen het infrezen of opbouwsysteem af op de situatie en controleren de aansluiting.",
+      ],
+      [
+        "Afwerken en in gebruik nemen",
+        "We plannen de vloerafwerking en bespreken het opstookprotocol.",
+      ],
+    ],
     related:
       '<a class="text-link" href="/energy/">Bekijk ook warmtepompen bij PRO ENERGY</a>',
   },
   {
     slug: "graafwerk",
     title: "Graafwerk met een minigraver",
+    photo: [
+      "/assets/services/graafwerk-schema.svg",
+      "Principeillustratie · geen uitvoeringsplan",
+    ],
+    steps: [
+      [
+        "Werkplek bekijken",
+        "We bespreken de toegang, werkruimte en bereikbaarheid van de locatie.",
+      ],
+      [
+        "Werk voorbereiden",
+        "We stemmen het tracé, leidinginformatie, eventuele meldingen en de bestemming van de grond af.",
+      ],
+      [
+        "Uitvoeren en afronden",
+        "We graven volgens de afspraken en laten het terrein klaar voor de afgesproken vervolgstap.",
+      ],
+    ],
     intro:
       "Graafwerk voor renovatie, tuin of leidingtracé in Utrecht en omgeving. Met een compacte graafmachine kunnen we ook werken op locaties waar weinig ruimte is, als de toegang het toelaat.",
     sections: [
@@ -45,17 +84,51 @@ const pages = [
 
 export async function buildServices() {
   const home = await readFile("index.html", "utf8");
-  for (const { slug, title, intro, sections, related, photo } of pages) {
-    const main = `<main id="main" class="shell section">
-      <a class="text-link" href="/#diensten">Terug naar expertise</a>
-      <h1 class="service-page-title">${title}</h1>
-      <p class="home-intro">${intro}</p>
-      ${photo ? '<figure class="service-preview"><img src="/assets/services/vloer-utrecht.webp" width="490" height="230" alt="Afgewerkte vloer bij een keukenrenovatie in Utrecht"><figcaption>Voorbeeld van vloerafwerking · Utrecht</figcaption></figure>' : ""}
-      <div class="service-details">${sections.map(([heading, text, id]) => `<section${id ? ` id="${id}"` : ""}><h2>${heading}</h2><p>${text}</p></section>`).join("")}</div>
-      <div class="home-actions">
-        <a class="home-button copper" href="mailto:hallo@debouwpro.nl?subject=${encodeURIComponent(title)}">Bespreek uw project</a>
-        ${related ?? ""}
-      </div>
+  for (const {
+    slug,
+    title,
+    intro,
+    sections,
+    related,
+    photo,
+    project = title,
+    steps,
+  } of pages) {
+    const inquiry = `/?project=${encodeURIComponent(project)}#contact`;
+    const main = `<main id="main">
+      <section class="service-hero">
+        <div class="shell service-hero-grid">
+          <div>
+            <a class="service-back" href="/#diensten">← Alle diensten</a>
+            <h1>${title}</h1>
+            <p class="service-lead">${intro}</p>
+            <div class="home-actions">
+              <a class="home-button copper" href="${inquiry}">Vraag een offerte aan</a>
+              <a class="home-button outline" href="#werkzaamheden">Bekijk de werkzaamheden</a>
+            </div>
+          </div>
+          ${photo ? `<figure class="service-visual"><img src="${photo[0]}" alt="" fetchpriority="high"><figcaption>${photo[1]}</figcaption></figure>` : `<ul class="service-summary" aria-label="Werkzaamheden">${sections.map(([heading]) => `<li>${heading}</li>`).join("")}</ul>`}
+        </div>
+      </section>
+      <nav class="service-subnav" aria-label="Op deze pagina"><div class="shell">
+        <a href="#werkzaamheden">Werkzaamheden</a><a href="#werkwijze">Werkwijze</a><a href="#service-contact">Contact</a>
+      </div></nav>
+      <section class="shell section service-section" id="werkzaamheden">
+        <h2>Wat we voor u doen</h2>
+        <div class="service-scope">${sections.map(([heading, text, id]) => `<article${id ? ` id="${id}"` : ""}><h3>${heading}</h3><p>${text}</p></article>`).join("")}</div>
+      </section>
+      <section class="service-process" id="werkwijze"><div class="shell section service-section">
+        <h2>Zo werken we</h2>
+        <ol class="service-scope">${steps.map(([heading, text]) => `<li><h3>${heading}</h3><p>${text}</p></li>`).join("")}</ol>
+      </div></section>
+      <section class="shell section service-section" id="service-contact">
+        <h2>Bespreek uw plannen</h2>
+        <div class="home-actions">
+          <a class="home-button copper" href="${inquiry}">Naar het contactformulier</a>
+          <a class="home-button outline" href="mailto:hallo@debouwpro.nl?subject=${encodeURIComponent(title)}">Bespreek uw project</a>
+          ${related ?? ""}
+        </div>
+      </section>
     </main>`;
     const html = home
       .replace(/<title>.*?<\/title>/, `<title>${title} | DE BOUW PRO</title>`)
@@ -68,8 +141,13 @@ export async function buildServices() {
         /(<meta\s+property="og:description"\s+content=")[^"]+/,
         `$1${intro}`,
       )
+      .replace(/<meta\s+property="og:image(?::alt)?"[^>]*>/g, "")
       .replace(/<script src="\/assets\/home\.js" defer><\/script>/, "")
       .replace('class="home-design"', 'class="home-design service-page"')
+      .replace(
+        "</head>",
+        '<link rel="stylesheet" href="/assets/services.css"></head>',
+      )
       .replace(/href="#(?!main")/g, 'href="/#')
       .replace(/<main\b[\s\S]*?<\/main>/, main)
       .replace(/<dialog\b[\s\S]*?<\/dialog>/, "");
