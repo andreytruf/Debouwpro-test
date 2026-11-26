@@ -75,7 +75,7 @@ body main .eyebrow {
   font-family: var(--site-sans);
 }
 
-body :is(.button, .home-button) {
+body :is(.button.button, .home-button) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +97,7 @@ body :is(.button.button-dark, .home-button.copper) {
   color: var(--site-ink);
 }
 
-body :is(.button, .home-button):hover {
+body :is(.button.button, .home-button):hover {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }

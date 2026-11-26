@@ -73,6 +73,10 @@ test("navigation and heading family are shared by all public page types", async 
       const logo = getComputedStyle(
         document.querySelector(".site-header .brand-logo"),
       );
+      const button = document.querySelector(
+        "main :is(.home-button.copper, .button.button-dark)",
+      );
+      const primary = button && getComputedStyle(button);
       return [
         heading.fontFamily,
         heading.fontWeight,
@@ -80,6 +84,12 @@ test("navigation and heading family are shared by all public page types", async 
         nav.fontSize,
         nav.fontWeight,
         logo.width,
+        primary && [
+          primary.fontSize,
+          primary.fontWeight,
+          primary.minHeight,
+          primary.backgroundColor,
+        ],
       ];
     });
 
@@ -101,6 +111,9 @@ test("navigation and heading family are shared by all public page types", async 
     "/page-not-found-for-style-check/",
   ]) {
     await page.goto(route);
-    expect(await styles(), route).toEqual(expected);
+    const observed = await styles();
+    expect(observed.slice(0, -1), route).toEqual(expected.slice(0, -1));
+    if (observed.at(-1))
+      expect(observed.at(-1), route).toEqual(expected.at(-1));
   }
 });
