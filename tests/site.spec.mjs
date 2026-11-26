@@ -215,3 +215,56 @@ test("each service card opens its destination from the card surface", async ({
     "Zakelijk & VvE-onderhoud",
   );
 });
+
+test("hero photograph precedes shade and copy; reduced motion shows everything immediately", async ({
+  browser,
+}) => {
+  const c = await browser.newContext({
+    reducedMotion: "no-preference",
+    viewport: { width: 1440, height: 1000 },
+  });
+  const p = await c.newPage();
+  await p.goto("http://127.0.0.1:8787/");
+  await p
+    .locator("[data-hero-sequence] picture img")
+    .evaluate((i) => i.decode());
+  const first = await p
+    .locator(".hero-content")
+    .evaluate((e) => Number(getComputedStyle(e).opacity));
+  expect(first).toBeLessThan(1);
+  await expect
+    .poll(() =>
+      p
+        .locator(".hero-content")
+        .evaluate((e) => Number(getComputedStyle(e).opacity)),
+    )
+    .toBe(1);
+  await expect
+    .poll(() =>
+      p
+        .locator("[data-hero-sequence]")
+        .evaluate((e) => Number(getComputedStyle(e, "::after").opacity)),
+    )
+    .toBe(1);
+  await c.close();
+  const reduced = await browser.newContext({ reducedMotion: "reduce" });
+  const q = await reduced.newPage();
+  await q.goto("http://127.0.0.1:8787/");
+  await expect(q.locator(".hero-content")).toHaveCSS("opacity", "1");
+  await expect(q.locator(".hero-content")).toHaveCSS("animation-name", "none");
+  await expect(q.locator("[data-hero-sequence]")).not.toHaveClass(
+    /hero-sequence-pending/,
+  );
+  await reduced.close();
+});
+test("keyboard focus bypasses the hero entrance", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const cta = page.getByRole("link", {
+    name: "Vraag een offerte aan",
+    exact: true,
+  });
+  await cta.focus();
+  await expect(cta).toBeFocused();
+  await expect(page.locator(".hero-content")).toHaveCSS("opacity", "1");
+});
