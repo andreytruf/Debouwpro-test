@@ -59,3 +59,48 @@ test("product explorers explain configurations and remain keyboard usable", asyn
   await expect(fallback.locator("[data-mode-panel]:visible")).toHaveCount(3);
   await context.close();
 });
+
+test("navigation and heading family are shared by all public page types", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const styles = async () =>
+    page.evaluate(() => {
+      const heading = getComputedStyle(document.querySelector("main h1"));
+      const nav = getComputedStyle(
+        document.querySelector(".site-header .navigation > a"),
+      );
+      const logo = getComputedStyle(
+        document.querySelector(".site-header .brand-logo"),
+      );
+      return [
+        heading.fontFamily,
+        heading.fontWeight,
+        nav.fontFamily,
+        nav.fontSize,
+        nav.fontWeight,
+        logo.width,
+      ];
+    });
+
+  await page.goto("/");
+  const expected = await styles();
+  for (const route of [
+    "/energy/",
+    "/energy/tesla/",
+    "/energy/ecoflow/",
+    "/energy/goodwe/",
+    "/energy/peblar/",
+    "/energy/samsung/",
+    "/energy/whspr/",
+    "/vloerverwarming/",
+    "/graafwerk/",
+    "/algemene-voorwaarden/",
+    "/privacy/",
+    "/cookies/",
+    "/page-not-found-for-style-check/",
+  ]) {
+    await page.goto(route);
+    expect(await styles(), route).toEqual(expected);
+  }
+});

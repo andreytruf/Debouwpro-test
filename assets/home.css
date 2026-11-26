@@ -1,42 +1,11 @@
 .home-design {
   --home-media-ratio: 16 / 10;
-  --home-paper: #f2f0ec;
-  --home-ink: #1a1a1a;
-  --home-copper: #d97841;
+  --home-paper: var(--site-paper);
+  --home-ink: var(--site-ink);
+  --home-copper: var(--site-copper);
   --home-line: #cec9c1;
   background: var(--home-paper);
   color: var(--home-ink);
-}
-
-.home-design .site-header {
-  background: var(--home-paper);
-}
-.home-design .navigation > a {
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-.home-design .nav-contact {
-  border: 1px solid currentColor;
-  padding: 0.65rem 1rem;
-}
-.home-design .brand .brand-logo {
-  width: clamp(160px, 16vw, 198px);
-}
-.home-design h1,
-.home-design h2 {
-  letter-spacing: -0.06em;
-  line-height: 1.02;
-  font-weight: 700;
-}
-.home-design h2 {
-  font-size: clamp(2.55rem, 5.6vw, 5.7rem);
-}
-.home-design h1 em,
-.home-design h2 em {
-  color: inherit;
-  font:
-    italic 400 1em Georgia,
-    serif;
 }
 
 .home-hero {
@@ -71,7 +40,6 @@
   padding-block: 4rem 6rem;
 }
 .home-hero h1 {
-  font-size: clamp(3.05rem, 8.3vw, 8.3rem);
   margin-top: 1.6rem;
 }
 .home-hero .eyebrow,
@@ -97,35 +65,6 @@
   align-items: start;
   flex-wrap: wrap;
   gap: 0.75rem;
-}
-.home-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3.1rem;
-  padding: 0.65rem 1.15rem;
-  border: 1px solid currentColor;
-  font:
-    700 0.9rem Arial,
-    Helvetica,
-    sans-serif;
-  text-decoration: none;
-  cursor: pointer;
-  color: inherit;
-  background: transparent;
-}
-.home-button.copper {
-  color: var(--home-ink);
-  border-color: var(--home-copper);
-  background: var(--home-copper);
-}
-.home-button:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-.home-design :is(a, button, input, textarea, select):focus-visible {
-  outline: 3px solid currentColor;
-  outline-offset: 4px;
 }
 .home-hero :focus-visible {
   outline-color: var(--home-paper);
@@ -375,9 +314,6 @@
   }
 }
 @media (max-width: 760px) {
-  .home-design .header-inner {
-    min-height: 65px;
-  }
   .home-hero {
     min-height: max(35rem, calc(100svh - 130px));
   }
@@ -446,7 +382,6 @@
 
 .service-page-title {
   margin-top: 1.5rem;
-  font-size: clamp(2.7rem, 7vw, 6rem);
 }
 .service-details {
   display: grid;
