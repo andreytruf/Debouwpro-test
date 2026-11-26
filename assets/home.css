@@ -97,16 +97,29 @@
   gap: 2rem 1.25rem;
 }
 .home-design .services article {
-  border-bottom: 1px solid var(--home-line);
+  padding: clamp(1.25rem, 2.2vw, 1.75rem);
+  border: 1px solid var(--home-line);
+  background: #eae6df;
 }
-.home-design .service-media,
+.service-symbol {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  background: var(--site-copper);
+  color: var(--site-ink);
+  margin-bottom: 1.125rem;
+}
+.service-symbol svg {
+  width: 2rem;
+  height: 2rem;
+}
 .home-gallery a {
   position: relative;
   display: block;
   aspect-ratio: var(--home-media-ratio);
   overflow: hidden;
 }
-.home-design .service-media img,
 .home-gallery img {
   position: absolute;
   inset: 0;
@@ -118,10 +131,11 @@
 .home-design .card-copy {
   display: grid;
   gap: 0.6rem;
-  padding-block: 1rem 1.3rem;
+  padding: 0;
 }
 .home-design .card-copy h3 {
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-size: clamp(1.2rem, 2vw, 1.4375rem);
+  font-weight: 700;
 }
 .home-design .card-copy a,
 .home-contact address a {
@@ -188,9 +202,6 @@
     repeating-linear-gradient(90deg, transparent 0 46px, #f2f0ec18 47px 48px),
     repeating-linear-gradient(0deg, transparent 0 46px, #f2f0ec18 47px 48px),
     radial-gradient(ellipse at 35% 30%, #514035, #211f1d 65%, #171717);
-}
-.home-design .energy-art.mini {
-  min-height: 0;
 }
 .home-design .energy-art i {
   position: absolute;
@@ -350,23 +361,6 @@
   }
 }
 
-.home-design .installation-media {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px;
-  background: var(--home-paper);
-}
-.installation-media > div {
-  position: relative;
-  overflow: hidden;
-}
-.installation-media img {
-  object-position: center;
-}
-.installation-credit {
-  color: var(--muted);
-  font-size: 0.82rem;
-}
 .groundwork-link {
   display: grid;
   gap: 0.6rem;
@@ -405,15 +399,4 @@
 .service-preview img {
   width: 100%;
   height: auto;
-}
-
-.home-design .floor-media {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-
-.floor-media > div {
-  position: relative;
-  overflow: hidden;
 }

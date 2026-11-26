@@ -25,7 +25,7 @@ for (const width of [320, 390, 768, 1440]) {
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    const allMedia = page.locator(".service-media, .home-gallery a");
+    const allMedia = page.locator(".home-gallery a");
     for (const media of await allMedia.all()) {
       const box = await media.boundingBox();
       expect(box.width / box.height).toBeCloseTo(1.6, 1);
@@ -149,7 +149,7 @@ test("flooring and excavation are linked from expertise", async ({
   request,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".installation-media img")).toHaveCount(2);
+  await expect(page.locator(".services .service-symbol svg")).toHaveCount(6);
   await page
     .getByRole("link", { name: "Vloerverwarming en vloerafwerking" })
     .click();
