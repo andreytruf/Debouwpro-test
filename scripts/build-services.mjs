@@ -80,11 +80,15 @@ const pages = [
     sections: [
       [
         "Sleuven en voorbereiding",
-        "We graven sleuven voor kabels, leidingen en afvoer. Voor tuinaanleg brengen we de grond op de gewenste hoogte en egaliseren we het terrein. Ook boomverzorging is mogelijk.",
+        "We graven sleuven voor kabels, leidingen en afvoer. Voor tuinaanleg brengen we de grond op de gewenste hoogte en egaliseren we het terrein.",
       ],
       [
         "Bouwputten, funderingen en betonwerk",
         "We graven bouwputten uit voor funderingen of zwembaden. Voor funderings- en betonwerk kunnen we de ondergrond op hoogte brengen, egaliseren en verdichten volgens de afspraken voor het vervolgwerk.",
+      ],
+      [
+        "Boomverzorging en snoeiwerk op hoogte",
+        "We snoeien bomen, ook op hoogte, en verwijderen bomen waar dat nodig is. Vooraf bekijken we de bereikbaarheid en de ruimte rondom de boom. We stemmen het afvoeren van takken, stammen en ander groenafval met u af.",
       ],
       [
         "Toegang en uitvoering",
