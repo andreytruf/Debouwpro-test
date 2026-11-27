@@ -8,7 +8,7 @@ const pages = [
     slug: "vloerverwarming",
     title: "Vloerverwarming en vloerafwerking",
     intro:
-      "Van watergedragen vloerverwarming tot uw afgewerkte vloer. In Utrecht en omgeving stemmen we voorbereiding, installatie en vloerafwerking op elkaar af.",
+      "Elektrische, infrarood- en watergedragen vloerverwarming in Utrecht en omgeving. We stemmen het systeem af op uw ruimte en vloerafwerking. Ook badkamerspiegels kunnen we voorzien van spiegelverwarming.",
     sections: [
       [
         "Infrezen in de bestaande dekvloer",
@@ -17,6 +17,14 @@ const pages = [
       [
         "Opbouwsysteem met netten of platen",
         "Bij een nieuwe vloeropbouw kunnen verwarmingsbuizen op draadstaalmatten worden bevestigd en in de dekvloer worden opgenomen. Als de opbouwhoogte beperkt is, bespreken we of een laagbouwsysteem met platen past. We houden rekening met isolatie, deuren en aansluitingen op omliggende vloeren.",
+      ],
+      [
+        "Elektrische vloerverwarming en infrarood",
+        "We bespreken welk elektrisch systeem, zoals verwarmingsmatten of infraroodfolie, past bij de ruimte en de gekozen vloerafwerking.",
+      ],
+      [
+        "Spiegelverwarming",
+        "We kunnen een badkamerspiegel voorzien van verwarming om condens op het verwarmde deel van de spiegel te beperken.",
       ],
       [
         "Afwerken met PVC, tegels of laminaat",
@@ -36,7 +44,7 @@ const pages = [
       ],
       [
         "Systeem kiezen en aanleggen",
-        "We stemmen het infrezen of opbouwsysteem af op de situatie en controleren de aansluiting.",
+        "We kiezen met u een passend systeem, stemmen de aanleg af op de vloer en controleren de aansluiting.",
       ],
       [
         "Afwerken en in gebruik nemen",
@@ -72,7 +80,11 @@ const pages = [
     sections: [
       [
         "Sleuven en voorbereiding",
-        "Denk aan sleuven voor afvoer of leidingen, het uitgraven van een gedeelte van de tuin of het voorbereiden van de ondergrond voor vervolgwerk.",
+        "We graven sleuven voor kabels, leidingen en afvoer en bereiden tuinen voor op vervolgwerk. Ook boomverzorging is mogelijk.",
+      ],
+      [
+        "Bouwputten, funderingen en betonwerk",
+        "We graven bouwputten uit voor funderingen of zwembaden. Voor funderings- en betonwerk kunnen we de ondergrond op hoogte brengen, egaliseren en verdichten volgens de afspraken voor het vervolgwerk.",
       ],
       [
         "Toegang en uitvoering",
