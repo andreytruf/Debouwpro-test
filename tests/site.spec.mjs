@@ -28,7 +28,7 @@ for (const width of [320, 390, 768, 1440]) {
     const allMedia = page.locator(".home-gallery a");
     for (const media of await allMedia.all()) {
       const box = await media.boundingBox();
-      expect(box.width / box.height).toBeCloseTo(1.6, 1);
+      expect(box.width / box.height).toBeCloseTo(width <= 475 ? 1 : 4 / 3, 1);
     }
     const cards = await page.locator(".services article").evaluateAll((items) =>
       items.map((item) => ({
