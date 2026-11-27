@@ -102,29 +102,18 @@
   background: #eae6df;
 }
 .service-symbol {
-  display: grid;
-  place-items: center;
-  width: 4rem;
-  height: 4rem;
-  background: var(--site-copper);
-  color: var(--site-ink);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 1.125rem;
 }
 .service-symbol svg {
-  width: 2rem;
-  height: 2rem;
-}
-.service-symbol--pair {
-  width: 6rem;
-}
-.service-symbol--pair svg {
-  width: 4.1667rem;
-}
-.service-symbol--trio {
-  width: 8rem;
-}
-.service-symbol--trio svg {
-  width: 6.3333rem;
+  display: block;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0.625rem;
+  background: var(--site-copper);
+  color: var(--site-ink);
 }
 .home-gallery a {
   position: relative;

@@ -147,7 +147,13 @@ test("flooring and excavation are linked from expertise", async ({
   request,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".services .service-symbol svg")).toHaveCount(9);
+  const badges = page.locator(".services .service-symbol");
+  await expect(badges).toHaveCount(9);
+  expect(
+    await badges.evaluateAll((groups) =>
+      groups.map((group) => group.querySelectorAll("svg").length),
+    ),
+  ).toEqual([2, 2, 2, 2, 2, 3, 1, 3, 2]);
   await page
     .getByRole("link", { name: "Vloerverwarming en vloerafwerking" })
     .click();
