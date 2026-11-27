@@ -8,7 +8,7 @@ const pages = [
     slug: "vloerverwarming",
     title: "Vloerverwarming en vloerafwerking",
     intro:
-      "Elektrische, infrarood- en watergedragen vloerverwarming in Utrecht en omgeving. We stemmen het systeem af op uw ruimte en vloerafwerking. Ook badkamerspiegels kunnen we voorzien van spiegelverwarming.",
+      "Elektrische, infrarood- en watergedragen vloerverwarming in Utrecht en omgeving. We stemmen het systeem af op uw ruimte en vloerafwerking. Ook elektrische en watergedragen wandverwarming is mogelijk.",
     sections: [
       [
         "Infrezen in de bestaande dekvloer",
@@ -23,8 +23,8 @@ const pages = [
         "We bespreken welk elektrisch systeem, zoals verwarmingsmatten of infraroodfolie, past bij de ruimte en de gekozen vloerafwerking.",
       ],
       [
-        "Spiegelverwarming",
-        "We kunnen een badkamerspiegel voorzien van verwarming om condens op het verwarmde deel van de spiegel te beperken.",
+        "Elektrische en watergedragen wandverwarming",
+        "Met elektrische verwarmingskabels of watergedragen leidingen in de wand geeft het wandoppervlak warmte af aan de ruimte. We stemmen het systeem af op de wandopbouw, de warmtebron en de afwerking met stucwerk of tegels.",
       ],
       [
         "Afwerken met PVC, tegels of laminaat",
@@ -80,7 +80,7 @@ const pages = [
     sections: [
       [
         "Sleuven en voorbereiding",
-        "We graven sleuven voor kabels, leidingen en afvoer en bereiden tuinen voor op vervolgwerk. Ook boomverzorging is mogelijk.",
+        "We graven sleuven voor kabels, leidingen en afvoer. Voor tuinaanleg brengen we de grond op de gewenste hoogte en egaliseren we het terrein. Ook boomverzorging is mogelijk.",
       ],
       [
         "Bouwputten, funderingen en betonwerk",
